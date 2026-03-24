@@ -1,7 +1,7 @@
 {
 	"meta": {
-		"title": "YYsuni",
-		"description": "YYsuni 的个人博客，记录前端开发、探索、笔记。前端 UI 更新代码仓库。",
+		"title": "SelfWeb",
+		"description": "Sonquain 的个人博客，记录日常笔记。",
 		"username": "Sonquain"
 	},
 	"theme": {
@@ -73,6 +73,6 @@
 	"enableChristmas": false,
 	"beian": {
 		"text": "",
-		"link": ""
+		"link": "https://sonquain.com"
 	}
 }
