@@ -1,5 +1,14 @@
 [
   {
+    "slug": "kmpbasic",
+    "title": "KMP算法回顾",
+    "tags": [],
+    "date": "2026-03-24T19:50",
+    "summary": "字符串处理，kmp回顾",
+    "hidden": false,
+    "category": "代码实现"
+  },
+  {
     "slug": "live2d-note",
     "title": "做一个 Live2D",
     "tags": [
