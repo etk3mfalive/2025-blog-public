@@ -1,44 +1,5 @@
 [
   {
-    "slug": "draggable-card",
-    "title": "物理吊牌拖拽笔记",
-    "tags": [
-      "Threejs",
-      "3D",
-      "笔记"
-    ],
-    "date": "2026-03-23T16:59",
-    "summary": "Threejs 物理效果，吊牌实现笔记",
-    "cover": "/blogs/draggable-card/5aef3921b3a5a761.webp",
-    "hidden": false,
-    "category": ""
-  },
-  {
-    "slug": "cursor-keyboard",
-    "title": "Cursor 快捷键",
-    "tags": [
-      "cursor"
-    ],
-    "date": "2026-03-06T09:47",
-    "summary": "常用、便捷操作",
-    "cover": "/blogs/cursor-keyboard/b8e0790993a85d17.jpg",
-    "hidden": false,
-    "category": ""
-  },
-  {
-    "slug": "blender-scene-note",
-    "title": "Blender场景建模笔记",
-    "tags": [
-      "blender",
-      "学习"
-    ],
-    "date": "2026-03-04T16:25",
-    "summary": "blender 笔记",
-    "cover": "/blogs/blender-scene-note/32c234f6bf0b8b9b.webp",
-    "hidden": false,
-    "category": ""
-  },
-  {
     "slug": "live2d-note",
     "title": "做一个 Live2D",
     "tags": [
@@ -195,16 +156,6 @@
     "cover": "/blogs/wave-ball/86d118420c399cdb.webp",
     "hidden": false,
     "category": "代码实现"
-  },
-  {
-    "slug": "fish-animation",
-    "title": "鱼鱼动画",
-    "tags": [],
-    "date": "2026-01-12T10:43",
-    "summary": "规划草稿",
-    "cover": "https://www.yysuni.com/images/pictures/b346636da687740b.webp",
-    "hidden": true,
-    "category": ""
   },
   {
     "slug": "love-island",
