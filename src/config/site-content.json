@@ -1,7 +1,7 @@
 {
 	"meta": {
 		"title": "YYsuni",
-		"description": "Sonquain 的个人博客，记录日常和笔记。",
+		"description": "YYsuni 的个人博客，记录前端开发、探索、笔记。前端 UI 更新代码仓库。",
 		"username": "Sonquain"
 	},
 	"theme": {
@@ -44,23 +44,23 @@
 		{
 			"id": "github",
 			"type": "github",
-			"value": "https://github.com/etk3mfalive",
+			"value": "https://github.com/yysuni",
 			"label": "Github",
 			"order": 3
 		},
 		{
 			"id": "juejin",
-			"type": "wechat",
-			"value": "etk3mfalive",
+			"type": "juejin",
+			"value": "https://juejin.cn/user/2427311675422382",
 			"label": "稀土掘金",
-			"order": 1
+			"order": 2
 		},
 		{
 			"id": "email",
 			"type": "email",
-			"value": "1138699365@qq.com",
+			"value": "yysuni1001@gmail.com",
 			"label": "",
-			"order": 2
+			"order": 1
 		}
 	],
 	"clockShowSeconds": false,
@@ -73,6 +73,6 @@
 	"enableChristmas": false,
 	"beian": {
 		"text": "",
-		"link": "https://sonquain.com"
+		"link": ""
 	}
 }
