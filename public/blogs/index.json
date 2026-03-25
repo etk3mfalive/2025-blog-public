@@ -1,5 +1,14 @@
 [
   {
+    "slug": "linkedlist",
+    "title": "链表练习",
+    "tags": [],
+    "date": "2026-03-25T20:59",
+    "summary": "链表整理",
+    "hidden": false,
+    "category": "代码实现"
+  },
+  {
     "slug": "stringbasic",
     "title": "字符串常见用法及函数整理",
     "tags": [],
