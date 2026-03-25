@@ -41,3 +41,46 @@ int main(){
 	return 0;
 } 
 ```
+
+kmp最重要的还是border应用吧.
+
+## T1字符串的周期
+
+>一个字符串的周期是指它的某个前缀，且通过反复拼接这个前缀最终能够得到整个字符串，其中最后一次拼接可以只是一部分。
+例如字符串 abcabca 的周期可以是 abc, abcabc 和 abcabca。
+给定一个字符串，请计算它的所有周期的长度。
+
+### 解题思路
+实际上这是一个类似于t为周期的循环块，即只需$s[1\sim n-t+1]$与$s[t\sim n]$相同。（大小为$n-t$）
+那么这与$border$块怎么有关呢？发现$n-t$实际为$border$大小，最大为$kmp[n]$，然后依次为$s[1~kmp[n]]$的$border$块。
+递归可得$kmp[n],kmp[kmp[n]]...$
+
+### 代码实现
+···
+#include <iostream>
+#include <string.h>
+using namespace std;
+const int N=1e6+10;
+char s[N];
+int kmp[N],ans[N],num;
+bool check(int tail,int t){
+	if (tail==t||t==0) return true;
+	if (tail<t) return false;
+	return check(kmp[tail],t);
+}
+int main(){
+	scanf("%s",s+1);
+	int n=strlen(s+1);
+	int j=0;
+	for (int i=2;i<=n;++i){
+		while (j&&s[j+1]!=s[i]) j=kmp[j];
+		if (s[j+1]==s[i]) j++;
+		kmp[i]=j;
+	}
+	int x=n;
+	while (x) x=kmp[x],ans[++num]=x;
+	for (int i=1;i<=num;++i) printf("%d ",n-ans[i]);
+	return 0;
+} 
+···
+
