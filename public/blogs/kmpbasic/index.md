@@ -56,7 +56,8 @@ kmp最重要的还是border应用吧.
 递归可得$kmp[n],kmp[kmp[n]]...$
 
 ### 代码实现
-···
+
+```
 #include <iostream>
 #include <string.h>
 using namespace std;
@@ -82,5 +83,5 @@ int main(){
 	for (int i=1;i<=num;++i) printf("%d ",n-ans[i]);
 	return 0;
 } 
-···
+```
 
