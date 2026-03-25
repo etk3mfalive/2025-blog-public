@@ -61,6 +61,20 @@
 			"value": "1138699365@qq.com",
 			"label": "",
 			"order": 1
+		},
+		{
+			"id": "button-1774430287991",
+			"type": "qq",
+			"value": "1138699365",
+			"label": "",
+			"order": 4
+		},
+		{
+			"id": "button-1774430300241",
+			"type": "bilibili",
+			"value": "https://space.bilibili.com/1966526891?spm_id_from=333.1007.0.0",
+			"label": "",
+			"order": 5
 		}
 	],
 	"clockShowSeconds": false,
