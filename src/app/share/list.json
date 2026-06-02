@@ -1,1 +1,12 @@
-[]
+[
+	{
+		"name": "Latex适应手册",
+		"logo": "blob:https://2025-blog-public-phi-peach.vercel.app/ec46b644-45fb-4359-aa03-4a942ad5e21e",
+		"url": "https://github.com/CTeX-org/lshort-zh-cn",
+		"description": "完备的latex说明书",
+		"tags": [
+			"工具"
+		],
+		"stars": 5
+	}
+]
