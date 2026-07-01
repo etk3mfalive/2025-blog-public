@@ -1,5 +1,5 @@
 {
 	"title": "Sonquain——爱、歌声与羽毛笔",
 	"description": "一份写着简单但不轻易的信封",
-	"content": "📦网站基于 Github 仓库完全存储，所有内容版本可控\n\n🚀无后端，无 serverless function，纯静态站点\n\n✏️文章通过可视化 UI 直接编辑并提交到 Github 仓库\n\n🔑所有用户都可以编辑，提交需要 Owner 的 Private Key\n\n## 技术栈\n\n- Next.js\n- React\n- TypeScript\n- Tailwind CSS\n- Motion\n- Github API"
+	"content": "## 关于Sonquain\n\n最喜欢的颜色：浅蓝，黑灰白，亮黄\n\n最喜欢的物品：羽毛笔 咖啡杯 \n\n北大最喜欢的主食：粽叶烤鱼\n\n最喜欢的：夏夜傍晚淋着小雨骑自行车\n\n害怕的：暴雨的空耳\n\n\n\n\n\n📦网站基于 Github 仓库完全存储，所有内容版本可控\n\n🚀无后端，无 serverless function，纯静态站点\n\n✏️文章通过可视化 UI 直接编辑并提交到 Github 仓库\n\n🔑所有用户都可以编辑，提交需要 Owner 的 Private Key\n\n## 技术栈\n\n- Next.js\n- React\n- TypeScript\n- Tailwind CSS\n- Motion\n- Github API"
 }
