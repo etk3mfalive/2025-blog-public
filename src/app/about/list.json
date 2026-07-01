@@ -1,5 +1,5 @@
 {
 	"title": "Sonquain——爱、歌声与羽毛笔",
 	"description": "一份写着简单但不轻易的信封",
-	"content": "## 关于Sonquain\n\n最喜欢的颜色：浅蓝，黑灰白，亮黄\n\n最喜欢的物品：羽毛笔 咖啡杯 \n\n北大最喜欢的主食：粽叶烤鱼\n\n最喜欢的：夏夜傍晚淋着小雨骑自行车\n\n害怕的：暴雨的空耳\n\n\n\n\n\n📦网站基于 Github 仓库完全存储，所有内容版本可控\n\n🚀无后端，无 serverless function，纯静态站点\n\n✏️文章通过可视化 UI 直接编辑并提交到 Github 仓库\n\n🔑所有用户都可以编辑，提交需要 Owner 的 Private Key\n\n## 技术栈\n\n- Next.js\n- React\n- TypeScript\n- Tailwind CSS\n- Motion\n- Github API"
+	"content": "## 关于Sonquain——持续补充\n\n最喜欢的颜色：浅蓝，黑灰白，亮黄\n\n最喜欢的事物：羽毛笔 高高的咖啡杯 淅淅沥沥的小雨 自然而深刻的逻辑 \n\n曾经最喜欢的歌单（不一定要耐听但至少要认可）：先留着\n\n很讨厌害怕的事物：很安静的环境，昏暗空阔的房间，狂风暴雨中央、无逻辑且麻烦的概念\n\n北大喜欢的美食： 3W 家三烧烤和烤盘饭、粽叶烤鱼 农二烧鸭窗口、西北窗口羊肉串 燕南家常菜 学一襄阳牛肉面和披萨 勺二黄焖鸡\n\n最喜欢的：夏夜傍晚淋着小雨骑自行车 能和熟悉的人畅谈一切的舒畅\n\n\n\n## 关于网站——开发者\n\n📦网站基于 Github 仓库完全存储，所有内容版本可控\n\n🚀无后端，无 serverless function，纯静态站点\n\n✏️文章通过可视化 UI 直接编辑并提交到 Github 仓库\n\n🔑所有用户都可以编辑，提交需要 Owner 的 Private Key\n\n## 技术栈\n\n- Next.js\n- React\n- TypeScript\n- Tailwind CSS\n- Motion\n- Github API"
 }
