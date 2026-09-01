@@ -8,5 +8,181 @@
 			"工具"
 		],
 		"stars": 5
+	},
+	{
+		"name": "age动漫",
+		"url": "https://www.agedm.io/?ref=github",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "askgo",
+		"url": "https://askgo.io/home",
+		"description": "中转站",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "ip纯净",
+		"url": "https://dashboard.ipdata.co/index.html",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "好玩的静态封面",
+		"url": "https://app.haikei.app/",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "genimi",
+		"url": "https://gemini.google.com/u/0/app",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "神秘blog",
+		"url": "https://stevehanov.ca/blog/how-i-run-multiple-10k-mrr-companies-on-a-20month-tech-stack",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "agentskillmarketplace",
+		"url": "https://skillsmp.com/",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "selfweb起源",
+		"url": "https://github.com/YYsuni/2025-blog-public",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "coursera",
+		"url": "https://www.coursera.org/",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "铁球web",
+		"url": "https://eason-iron.github.io/",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "打字玩",
+		"url": "https://www.keybr.com/#google_vignette",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "cfw",
+		"url": "https://docs.lefly.co/contents/Shadowrocketid.html",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "opengl学习",
+		"url": "https://learnopengl-cn.readthedocs.io/zh/latest/",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "nanoka数据库",
+		"url": "https://nanoka.cc/",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "gy分享",
+		"url": "https://my.feishu.cn/docx/AjHid6CXwoHvqbxdyCqcBkhxn6b",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "好好说话",
+		"url": "https://lab.magiconch.com/nbnhhsh/",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "wallesspku账户页",
+		"url": "https://profile.wallesspku.space/profile",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "lovart",
+		"url": "https://www.lovart.ai/zh/home",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "steampricehistory",
+		"url": "https://www.steamdb.com/en/tools/steam-price-history",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "pdf转md",
+		"url": "https://mineru.net/",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "qoj",
+		"url": "https://qoj.ac/",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
+	},
+	{
+		"name": "课程测评@PKU",
+		"url": "https://courses.pinzhixiaoyuan.com/",
+		"description": "",
+		"logo": "",
+		"tags": [],
+		"stars": 5
 	}
 ]
