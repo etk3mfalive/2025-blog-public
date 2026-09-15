@@ -9,8 +9,6 @@ import { useCenterStore } from '@/hooks/use-center'
 import { CARD_SPACING } from '@/consts'
 import ScrollOutlineSVG from '@/svgs/scroll-outline.svg'
 import ScrollFilledSVG from '@/svgs/scroll-filled.svg'
-import ProjectsFilledSVG from '@/svgs/projects-filled.svg'
-import ProjectsOutlineSVG from '@/svgs/projects-outline.svg'
 import AboutFilledSVG from '@/svgs/about-filled.svg'
 import AboutOutlineSVG from '@/svgs/about-outline.svg'
 import ShareFilledSVG from '@/svgs/share-filled.svg'
@@ -30,12 +28,6 @@ const list = [
 		iconActive: ScrollFilledSVG,
 		label: '近期文章',
 		href: '/blog'
-	},
-	{
-		icon: ProjectsOutlineSVG,
-		iconActive: ProjectsFilledSVG,
-		label: '我的项目',
-		href: '/projects'
 	},
 	{
 		icon: AboutOutlineSVG,

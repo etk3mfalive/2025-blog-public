@@ -8,6 +8,32 @@ declare module '*.svg?url' {
 	export default content
 }
 
+declare module '*.png' {
+	const content: StaticImageData
+
+	export default content
+}
+declare module '*.jpg' {
+	const content: StaticImageData
+
+	export default content
+}
+declare module '*.jpeg' {
+	const content: StaticImageData
+
+	export default content
+}
+declare module '*.webp' {
+	const content: StaticImageData
+
+	export default content
+}
+declare module '*.avif' {
+	const content: StaticImageData
+
+	export default content
+}
+
 declare type NullableNumber = string | number | null
 declare type NullableObject = Record<string, any> | null
 declare type NullableArray = Record<string, any>[] | null

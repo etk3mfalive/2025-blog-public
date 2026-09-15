@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import { toast } from 'sonner'
 import { Plus } from 'lucide-react'
 import { DialogModal } from '@/components/dialog-modal'
-import type { ImageItem } from '../../projects/components/image-upload-dialog'
+import type { ImageItem } from '@/lib/image-item'
 
 interface UploadDialogProps {
 	onClose: () => void

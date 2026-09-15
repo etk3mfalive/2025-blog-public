@@ -1,96 +1,105 @@
-'use client'
+import fs from 'node:fs'
+import path from 'node:path'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
-import { useEffect, useMemo, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
-import dayjs from 'dayjs'
-import { motion } from 'motion/react'
-import { BlogPreview } from '@/components/blog-preview'
-import { loadBlog, type BlogConfig } from '@/lib/load-blog'
-import { useReadArticles } from '@/hooks/use-read-articles'
-import LiquidGrass from '@/components/liquid-grass'
+import BlogDetail from './blog-detail'
+import type { BlogConfig } from '@/app/blog/types'
+import { getSiteUrl } from '@/lib/site-url'
 
-export default function Page() {
-	const params = useParams() as { id?: string | string[] }
-	const slug = Array.isArray(params?.id) ? params.id[0] : params?.id || ''
-	const router = useRouter()
-	const { markAsRead } = useReadArticles()
+type PageProps = { params: Promise<{ id: string }> }
 
-	const [blog, setBlog] = useState<{ config: BlogConfig; markdown: string; cover?: string } | null>(null)
-	const [error, setError] = useState<string | null>(null)
-	const [loading, setLoading] = useState<boolean>(true)
+const BLOG_ROOT = path.join(process.cwd(), 'public', 'blogs')
+/** slug 只允许字母/数字/下划线/连字符，避免路径穿越 */
+const SAFE_SLUG = /^[A-Za-z0-9_-]+$/
 
-	useEffect(() => {
-		let cancelled = false
-		async function run() {
-			if (!slug) return
-			try {
-				setLoading(true)
-				const blogData = await loadBlog(slug)
-
-				if (!cancelled) {
-					setBlog(blogData)
-					setError(null)
-					markAsRead(slug)
-				}
-			} catch (e: any) {
-				if (!cancelled) setError(e?.message || '加载失败')
-			} finally {
-				if (!cancelled) setLoading(false)
-			}
-		}
-		run()
-		return () => {
-			cancelled = true
-		}
-	}, [slug, markAsRead])
-
-	const title = useMemo(() => (blog?.config.title ? blog.config.title : slug), [blog?.config.title, slug])
-	const date = useMemo(() => dayjs(blog?.config.date).format('YYYY年 M月 D日'), [blog?.config.date])
-	const tags = blog?.config.tags || []
-
-	const handleEdit = () => {
-		router.push(`/write/${slug}`)
+/**
+ * 构建期/请求期在服务端读取单篇文章的 config.json。
+ * 这样文章页即使正文仍由客户端渲染，至少能输出正确的 title / description /
+ * canonical / og:image / JSON-LD，修复“分享无卡片、搜索引擎只见空壳”的问题。
+ */
+function readBlogConfig(slug: string): BlogConfig | null {
+	if (!slug || !SAFE_SLUG.test(slug)) return null
+	try {
+		const raw = fs.readFileSync(path.join(BLOG_ROOT, slug, 'config.json'), 'utf8')
+		return JSON.parse(raw) as BlogConfig
+	} catch {
+		return null
 	}
+}
 
-	if (!slug) {
-		return <div className='text-secondary flex h-full items-center justify-center text-sm'>无效的链接</div>
+export async function generateStaticParams() {
+	try {
+		return fs
+			.readdirSync(BLOG_ROOT, { withFileTypes: true })
+			.filter(entry => entry.isDirectory())
+			.map(entry => ({ id: entry.name }))
+	} catch {
+		return []
 	}
+}
 
-	if (loading) {
-		return <div className='text-secondary flex h-full items-center justify-center text-sm'>加载中...</div>
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+	const { id } = await params
+	const config = readBlogConfig(id)
+	if (!config) return {}
+
+	const siteUrl = getSiteUrl()
+	const title = config.title || id
+	const description = config.summary || undefined
+	const url = `${siteUrl}/blog/${id}`
+	const cover = config.cover ? (config.cover.startsWith('http') ? config.cover : `${siteUrl}${config.cover}`) : undefined
+
+	return {
+		title,
+		description,
+		alternates: { canonical: url },
+		openGraph: {
+			type: 'article',
+			title,
+			description,
+			url,
+			publishedTime: config.date,
+			tags: config.tags?.filter(Boolean),
+			images: cover ? [cover] : undefined
+		},
+		twitter: {
+			card: cover ? 'summary_large_image' : 'summary',
+			title,
+			description,
+			images: cover ? [cover] : undefined
+		},
+		robots: config.hidden ? { index: false, follow: false } : undefined
 	}
+}
 
-	if (error) {
-		return <div className='flex h-full items-center justify-center text-sm text-red-500'>{error}</div>
-	}
+export default async function Page({ params }: PageProps) {
+	const { id } = await params
+	const config = readBlogConfig(id)
+	if (!config) notFound()
 
-	if (!blog) {
-		return <div className='text-secondary flex h-full items-center justify-center text-sm'>文章不存在</div>
+	const siteUrl = getSiteUrl()
+	const cover = config.cover ? (config.cover.startsWith('http') ? config.cover : `${siteUrl}${config.cover}`) : undefined
+
+	const jsonLd = {
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: config.title || id,
+		description: config.summary || undefined,
+		image: cover ? [cover] : undefined,
+		datePublished: config.date,
+		dateModified: config.date,
+		inLanguage: 'zh-CN',
+		keywords: config.tags?.filter(Boolean).join(','),
+		mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${id}` },
+		author: { '@type': 'Person', name: 'Sonquain' },
+		publisher: { '@type': 'Person', name: 'Sonquain' }
 	}
 
 	return (
 		<>
-			<BlogPreview
-				markdown={blog.markdown}
-				title={title}
-				tags={tags}
-				date={date}
-				summary={blog.config.summary}
-				cover={blog.cover ? (blog.cover.startsWith('http') ? blog.cover : `${origin}${blog.cover}`) : undefined}
-				slug={slug}
-			/>
-
-			<motion.button
-				initial={{ opacity: 0, scale: 0.6 }}
-				animate={{ opacity: 1, scale: 1 }}
-				whileHover={{ scale: 1.05 }}
-				whileTap={{ scale: 0.95 }}
-				onClick={handleEdit}
-				className='absolute top-4 right-6 rounded-xl border bg-white/60 px-6 py-2 text-sm backdrop-blur-sm transition-colors hover:bg-white/80 max-sm:hidden'>
-				编辑
-			</motion.button>
-
-			{slug === 'liquid-grass' && <LiquidGrass />}
+			<script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+			<BlogDetail />
 		</>
 	)
 }

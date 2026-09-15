@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import Layout from '@/layout'
 import Head from '@/layout/head'
 import siteContent from '@/config/site-content.json'
+import { getSiteUrl } from '@/lib/site-url'
 
 const {
 	meta: { title, description },
@@ -11,15 +12,18 @@ const {
 } = siteContent
 
 export const metadata: Metadata = {
+	metadataBase: new URL(getSiteUrl()),
 	title,
 	description,
 	openGraph: {
 		title,
-		description
+		description,
+		images: ['/images/avatar.png']
 	},
 	twitter: {
 		title,
-		description
+		description,
+		card: 'summary'
 	}
 }
 

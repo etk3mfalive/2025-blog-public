@@ -24,7 +24,7 @@ export function useMarkdownRender(markdown: string): MarkdownRenderResult {
 				const { html, toc } = await renderMarkdown(markdown)
 				if (!cancelled) {
 					// Extract pre elements and replace with placeholders before parsing
-					const codeBlocks: Array<{ placeholder: string; code: string; preHtml: string }> = []
+					const codeBlocks: Array<{ placeholder: string; code: string; preHtml: string; title?: string }> = []
 					let processedHtml = html.replace(/<pre\s+data-code="([^"]*)"([^>]*)>([\s\S]*?)<\/pre>/g, (match, codeAttr, attrs, content) => {
 						const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`
 						// Decode HTML entities in code attribute
@@ -34,10 +34,17 @@ export function useMarkdownRender(markdown: string): MarkdownRenderResult {
 							.replace(/&lt;/g, '<')
 							.replace(/&gt;/g, '>')
 							.replace(/&amp;/g, '&')
+						// Extract title from data-title attribute
+						const titleMatch = attrs.match(/data-title="([^"]*)"/)
+						const title = titleMatch ? titleMatch[1]
+							.replace(/&quot;/g, '"')
+							.replace(/&amp;/g, '&')
+							: undefined
 						codeBlocks.push({
 							placeholder,
 							code,
-							preHtml: `${content}`
+							preHtml: `${content}`,
+							title
 						})
 						return placeholder
 					})
@@ -64,7 +71,7 @@ export function useMarkdownRender(markdown: string): MarkdownRenderResult {
 												if(block){
 													const preElement = parse(block.preHtml) as ReactElement
 													return (
-														<CodeBlock key={block.placeholder} code={block.code}>{preElement}</CodeBlock>
+														<CodeBlock key={block.placeholder} code={block.code} title={block.title}>{preElement}</CodeBlock>
 													)
 												}
 											}else{

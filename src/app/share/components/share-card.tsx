@@ -94,12 +94,24 @@ export function ShareCard({ share, isEditMode = false, onUpdate, onDelete }: Sha
 			<div>
 				<div className='mb-4 flex items-center gap-4'>
 					<div className='group relative'>
-						<img
-							src={localShare.logo}
-							alt={localShare.name}
-							className={cn('h-16 w-16 rounded-xl object-cover', canEdit && 'cursor-pointer')}
-							onClick={() => canEdit && setShowLogoDialog(true)}
-						/>
+						{localShare.logo ? (
+							<img
+								src={localShare.logo}
+								alt={localShare.name}
+								className={cn('h-16 w-16 rounded-xl object-cover', canEdit && 'cursor-pointer')}
+								onClick={() => canEdit && setShowLogoDialog(true)}
+							/>
+						) : (
+							// logo 缺失（历史数据里出现过 blob: 临时地址）时退化为首字母占位，避免裂图
+							<div
+								className={cn(
+									'bg-secondary/10 text-secondary flex h-16 w-16 items-center justify-center rounded-xl text-xl font-bold',
+									canEdit && 'cursor-pointer'
+								)}
+								onClick={() => canEdit && setShowLogoDialog(true)}>
+								{(localShare.name || '?').trim().charAt(0)}
+							</div>
+						)}
 						{canEdit && (
 							<div className='ev pointer-events-none absolute inset-0 flex items-center justify-center rounded-xl bg-black/40 opacity-0 transition-opacity group-hover:opacity-100'>
 								<span className='text-xs text-white'>更换</span>

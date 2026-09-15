@@ -175,6 +175,77 @@
 	transform: scale(0.95);
 }
 
+/* Collapsible Code Block */
+.prose .code-block-collapsible {
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.prose .code-block-header {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.6rem 0.75rem;
+	background: rgba(0, 0, 0, 0.03);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+	user-select: none;
+}
+
+.prose .code-block-toggle-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	background: transparent;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	color: rgba(0, 0, 0, 0.5);
+	flex-shrink: 0;
+	transition: background 0.15s, color 0.15s;
+}
+
+.prose .code-block-toggle-btn:hover {
+	background: rgba(0, 0, 0, 0.06);
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.prose .code-block-title {
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: var(--font-mono);
+	flex: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.prose .code-block-copy-btn-header {
+	position: static;
+	opacity: 0;
+	width: 28px;
+	height: 28px;
+	flex-shrink: 0;
+}
+
+.prose .code-block-header:hover .code-block-copy-btn-header {
+	opacity: 1;
+}
+
+.prose .code-block-body {
+	margin: 0;
+}
+
+.prose .code-block-body > pre {
+	margin: 0;
+	border: none;
+	border-radius: 0;
+}
+
 /* Images */
 .prose img {
 	max-width: 40%;

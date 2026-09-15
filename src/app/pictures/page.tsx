@@ -9,7 +9,7 @@ import UploadDialog from './components/upload-dialog'
 import { pushPictures } from './services/push-pictures'
 import { useAuthStore } from '@/hooks/use-auth'
 import { useConfigStore } from '@/app/(home)/stores/config-store'
-import type { ImageItem } from '../projects/components/image-upload-dialog'
+import type { ImageItem } from '@/lib/image-item'
 import { useRouter } from 'next/navigation'
 
 export interface Picture {

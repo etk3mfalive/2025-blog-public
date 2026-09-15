@@ -7,7 +7,8 @@ const nextConfig: NextConfig = {
 	reactCompiler: true,
 	pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 	typescript: {
-		ignoreBuildErrors: true
+		// 以前这里是 true，类型错误会静默上线；当前 `tsc --noEmit` 已无错误，故改为让构建失败
+		ignoreBuildErrors: false
 	},
 	experimental: {
 		scrollRestoration: false

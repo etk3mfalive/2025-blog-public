@@ -59,7 +59,7 @@ async function loadKatex() {
 export async function renderMarkdown(markdown: string): Promise<MarkdownRenderResult> {
 	// Load optional renderers first so they apply on the FIRST lex/parse pass.
 	// (If we lex before registering extensions, math tokens won't ever be produced on a cold refresh.)
-	const codeBlockMap = new Map<string, { html: string; original: string }>()
+	const codeBlockMap = new Map<string, { html: string; original: string; title?: string }>()
 	const [shiki, katex] = await Promise.all([loadShiki(), loadKatex()])
 
 	// Render HTML with heading ids
@@ -77,12 +77,15 @@ export async function renderMarkdown(markdown: string): Promise<MarkdownRenderRe
 			// Add data-code attribute with original code for copy functionality
 			// Escape HTML entities for attribute value
 			const escapedCode = codeData.original.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+			const titleAttr = codeData.title
+				? ` data-title="${codeData.title.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}"`
+				: ''
 			if (codeData.html) {
 				// Shiki highlighted code
-				return `<pre data-code="${escapedCode}">${codeData.html}</pre>`
+				return `<pre data-code="${escapedCode}"${titleAttr}>${codeData.html}</pre>`
 			}
 			// Fallback for failed highlighting
-			return `<pre data-code="${escapedCode}"><code>${codeData.original}</code></pre>`
+			return `<pre data-code="${escapedCode}"${titleAttr}><code>${codeData.original}</code></pre>`
 		}
 		// Fallback to default (inline code, not code block)
 		return `<code>${token.text}</code>`
@@ -207,22 +210,31 @@ export async function renderMarkdown(markdown: string): Promise<MarkdownRenderRe
 			const originalCode = codeToken.text
 			const key = `__SHIKI_CODE_${codeBlockMap.size}__`
 
+			// Parse title from lang string: e.g. "cpp title="Quick Sort"" or 'cpp title="Quick Sort"'
+			let lang = codeToken.lang || 'text'
+			let title: string | undefined
+			const titleMatch = lang.match(/^(.*?)\s+title=["'](.+?)["']$/)
+			if (titleMatch) {
+				lang = titleMatch[1].trim() || 'text'
+				title = titleMatch[2]
+			}
+
 			if (shiki) {
 				try {
 					const html = await shiki.codeToHtml(originalCode, {
-						lang: codeToken.lang || 'text',
+						lang,
 						theme: 'one-light'
 					})
-					codeBlockMap.set(key, { html, original: originalCode })
+					codeBlockMap.set(key, { html, original: originalCode, title })
 					codeToken.text = key
 				} catch {
 					// Keep original if highlighting fails
-					codeBlockMap.set(key, { html: '', original: originalCode })
+					codeBlockMap.set(key, { html: '', original: originalCode, title })
 					codeToken.text = key
 				}
 			} else {
 				// Fallback when shiki is not available
-				codeBlockMap.set(key, { html: '', original: originalCode })
+				codeBlockMap.set(key, { html: '', original: originalCode, title })
 				codeToken.text = key
 			}
 		}

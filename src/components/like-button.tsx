@@ -13,7 +13,11 @@ type LikeButtonProps = {
 	delay?: number
 }
 
-const ENDPOINT = 'https://blog-liker.yysuni1001.workers.dev/api/like'
+/**
+ * 点赞后端地址。默认值是上游模板作者部署的 Worker（blog-liker.yysuni1001.workers.dev），
+ * 数据存在别人那里且没有 SLA；自建后请用 NEXT_PUBLIC_LIKE_ENDPOINT 覆盖。
+ */
+const ENDPOINT = process.env.NEXT_PUBLIC_LIKE_ENDPOINT || 'https://blog-liker.yysuni1001.workers.dev/api/like'
 
 export default function LikeButton({ slug = 'etk3mfalive', delay, className }: LikeButtonProps) {
 	slug = BLOG_SLUG_KEY + slug

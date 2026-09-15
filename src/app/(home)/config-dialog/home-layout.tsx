@@ -39,7 +39,9 @@ export function HomeLayout({ cardStylesData, setCardStylesData, onClose }: HomeL
 	}
 
 	const handleReset = () => {
-		setCardStylesData(cardStylesDefault as CardStyles)
+		// card-styles-default.json 里的 offsetX/offsetY 是 null，而运行时类型是 number，
+		// 结构上不重叠，这里显式走 unknown 转换表明是有意为之
+		setCardStylesData(cardStylesDefault as unknown as CardStyles)
 	}
 
 	return (
