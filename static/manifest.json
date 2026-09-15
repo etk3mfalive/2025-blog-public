@@ -1,0 +1,19 @@
+{
+	"short_name": "SelfWeb",
+	"name": "SelfWeb · Sonquain",
+	"description": "Sonquain 的个人博客，记录日常笔记。",
+	"start_url": "/",
+	"scope": "/",
+	"display": "standalone",
+	"background_color": "#eeeeee",
+	"theme_color": "#de4331",
+	"lang": "zh-CN",
+	"icons": [
+		{
+			"src": "/favicon.png",
+			"sizes": "any",
+			"type": "image/png",
+			"purpose": "any"
+		}
+	]
+}

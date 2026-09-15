@@ -1,48 +1,19 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/.open-next/
-/out/
-
-# production
-/build
-
-# misc
+node_modules
+.svelte-kit
+build
+.vercel
 .DS_Store
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+
+# 私钥绝不入库（写作控制台用的 GitHub App 私钥）
 *.pem
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# 旧 Next.js 应用的构建产物（源码已移到 legacy/next-blog/）
+.next
 
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-# cloudflare
-.output
-.wrangler
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-#vscode
-.history/
+# 派生目录：由 scripts/sync-content.mjs / build-data.mjs 在构建时生成
+static/blogs
+static/data

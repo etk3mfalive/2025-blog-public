@@ -1,164 +1,78 @@
-# 2025 Blog
+# SelfWeb（soq.app）
 
-> 最新引导说明：https://www.yysuni.com/blog/readme
+SvelteKit 静态站：全站构建期预渲染，部署在 Vercel，内容以 Git 仓库为唯一数据源，
+写作在浏览器里完成（GitHub App 私钥 → installation token → Git Data API 一次提交）。
 
-该项目使用 Github App 管理项目内容，请保管好后续创建的 **Private key**，不要上传到公开网上。
+## 目录结构
 
-## 1. 安装
-
-使用该项目可以先不做本地开发，直接部署然后配置环境变量。具体变量名请看下列大写变量
-
-```ts
-export const GITHUB_CONFIG = {
-	OWNER: process.env.NEXT_PUBLIC_GITHUB_OWNER || 'yysuni',
-	REPO: process.env.NEXT_PUBLIC_GITHUB_REPO || '2025-blog-public',
-	BRANCH: process.env.NEXT_PUBLIC_GITHUB_BRANCH || 'main',
-	APP_ID: process.env.NEXT_PUBLIC_GITHUB_APP_ID || '-'
-} as const
+```
+/                    SvelteKit 应用（本站）
+├─ src/
+│  ├─ routes/        页面：/、/blog、/blog/[slug]、/about、/share、/bloggers、
+│  │                 /pictures、/snippets、/svgs、/clock、/image-toolbox、
+│  │                 /live2d、/wuthering-waves、/write（写作控制台）
+│  └─ lib/
+│     ├─ content.ts  内容层（读 static/blogs，构建期用）
+│     ├─ markdown.ts 构建期 Markdown 渲染（marked + shiki + katex）
+│     ├─ github/     GitHub 写入层（认证 / JWT / Git Data API）
+│     └─ data/       站点配置与列表数据（site-content.json、share.json…）
+├─ static/           派生目录：blogs/、data/ 由脚本在构建时生成（不入库）
+├─ scripts/          sync-content / build-data / check-content / check-jwt / serve-build
+├─ public/           内容与媒体（写作控制台提交到这里）
+│  ├─ blogs/<slug>/{index.md,config.json,图片}
+│  └─ images/ music/ live2d/
+└─ legacy/next-blog/ 旧的 Next.js 应用源码（保留用于对照与回滚，不参与构建）
 ```
 
-也可以自己手动先调整安装，可自行 `pnpm i`
+## 本地开发
 
-## 2. 部署
-
-我这里熟悉 Vercel 部署，就以 Vercel 部署为例子。创建 Project => Import 这个项目
-
-![](https://www.yysuni.com/blogs/readme/730266f17fab9717.png)
-
-无需配置，直接点部署
-
-![](https://www.yysuni.com/blogs/readme/95dee9a69154d0d0.png)
-
-大约 60 秒会部署完成，有一个直接 vercel 域名，如：https://2025-blog-public.vercel.app/
-
-到这里部署网站已经完成了，下一步创建 Github App
-
-## 3. 创建 Github App 链接仓库
-
-在 github 个人设置里面，找到最下面的 Developer Settings ，点击进入
-
-![](https://www.yysuni.com/blogs/readme/0abb3b592cbedad6.png)
-
-进入开发者页面，点击 **New Github App**
-
-*GitHub App name* 和 *Homepage URL* , 输入什么都不影响。Webhook 也关闭，不需要。
-
-![](https://www.yysuni.com/blogs/readme/71dcd9cf8ec967c0.png)
-
-只需要注意设置一个仓库 write 权限，其它不用。
-
-![](https://www.yysuni.com/blogs/readme/2be290016e56cd34.png)
-
-点击创建，谁能安装这个仓库这个选择无所谓。直接创建。
-
-![](https://www.yysuni.com/blogs/readme/aa002e6805ab2d65.png)
-
-
-### 创建密钥
-
-创建好 Github App 后会提示必须创建一个 **Private Key**，直接创建，会自动下载（不见了也不要紧，后面自己再创建再下载就行）。页面上有个 **App ID** 需要复制一下
-
-再切换到安装页面
-
-![](https://www.yysuni.com/blogs/readme/c122b1585bb7a46a.png)
-
-这里一定要只**授权当前项目**。
-
-![](https://www.yysuni.com/blogs/readme/2cf1cee3b04326f1.png)
-
-点击安装，就完成了 Github App 管理该仓库的权限设置了。下一步就是让前端知道推送那个项目，就是最开始提到的环境变量。（如果你不会设置环境变量，直接改仓库文件 `src/consts.ts` 也行。因为是公开的，所以环境变量意义也不大）
-
-直接输入这几个环境变量值就行，一般只用设置 OWNER 和 APP_ID。其它配置不用管，直接输入创建就行。
-
-![](https://www.yysuni.com/blogs/readme/c5a049d737848abf.png)
-
-设置完成后，需要手动再部署一次，让环境变量生效。
-* 可以直接 push 一次仓库代码会触发部署
-* 也可以手动选择创建一次部署
-![](https://www.yysuni.com/blogs/readme/59a802ed8d1c3a13.png)
-
-## 4. 完成
-
-现在，部署的这个网站就可以开始使用前端改内容了。比如更改一个分享内容。
-
-**提示**，网站前端页面删改完提示成功之后，你需要等待后台的部署完成，再刷新页面才能完成服务器内容的更新哦。
-
-## 5. 删除
-
-使用这个项目应该第一件事需要删除我的 blog，单独删除，批量删除已完成。
-
-## 6. 配置
-
-大部分页面右上角都会有一个编辑按钮，意味着你可以使用 **private key** 进行配置部署。
-
-### 6.1 网站配置
-
-首页有一个不显眼的配置按钮，点击就能看到现在可以配置的内容。
-
-![](https://www.yysuni.com/blogs/readme/cddb4710e08a5069.png)
-
-## 7. 写 blog
-
-写 blog 的图片管理，可能会有疑惑。图片管理推荐逻辑是先点击 **+ 号** 添加图片，（推荐先压缩好，尺寸推荐宽度不超过 1200）。然后将上传好的图片直接拖入文案编辑区，这就已经添加好了，点击右上角预览就可以看到效果。
-
-## 8. 写给非前端
-
-非前端配置内容，还是需要一个文件指引。下面写一些更细致的代码配置。
-
-### 8.1 移除 Liquid Grass
-
-进入 `src/layout/index.tsx` 文件，删除两行代码，然后提交代码到你的 github
-```tsx
-const LiquidGrass = dynamic(() => import('@/components/liquid-grass'), { ssr: false })
-// 中间省略...
-<LiquidGrass /> // 第 53 行
+```bash
+pnpm install
+pnpm dev            # 同步内容 → 生成静态数据 → 开发服务器（默认 5173）
+pnpm build          # 同上两步 + 内容校验 + vite build（输出 build/）
+node scripts/serve-build.mjs 4173   # 零依赖静态预览（模拟 Vercel 的 cleanUrls）
+pnpm check          # svelte-check（当前 0 error / 0 warning）
+pnpm check-jwt      # 校验 GitHub App JWT 实现（PKCS#1/PKCS#8/篡改检测）
 ```
 
-![](https://www.yysuni.com/blogs/readme/f70ff3fe3a77f193.png)
+## 构建流水线
 
-### 8.2 配置首页内容
+```
+public/blogs/**  ──sync-content──▶  static/blogs/**   （文章、图片、config.json）
+public/{images,music,live2d}  ──▶  static/{...}
+public/blogs/*   ──build-data───▶  static/data/posts.json + static/data/posts/<slug>.json
+                                   static/data/about.json
+public/blogs/*   ──check-content▶  校验：JSON、必填字段、封面存在、代码围栏成对…
+                                   ──vite build──▶ build/（35 个 HTML，全站预渲染）
+```
 
-首页的内容现在只能前端配置一部分，所以代码更改在 `src/app/(home)` 目录，这个目录代表首页所有文件。首页的具体文件为  `src/app/(home)/page.tsx`
+为什么要 `static/data/*.json`：本站是纯静态导出，运行时没有服务器。页面若用服务端 load
+（`+page.server.ts`），浏览器端导航会请求 `/xxx/__data.json`，而 adapter-static 不会生成该文件；
+若通用 load 直接 import `node:fs` 的内容层，fs 逻辑又会进客户端包。因此内容在构建期编译成
+静态 JSON，页面用通用 load `fetch('/data/…')` 读取：预渲染有完整 HTML（SEO），站内跳转也正常。
 
- ![](https://www.yysuni.com/blogs/readme/011679cd9bf73602.png)
+## 写作控制台
 
-这里可以看到有很多 `Card` 文件，需要改那个首页 Card 内容就可以点入那个具体文件修改。
+访问 `/write`（新建）或 `/write?slug=<slug>`（编辑/删除）：
 
-比如中间的内容，为 `HiCard`，点击 `hi-card.tsx` 文件，即可更改其内容。
+1. 选择 GitHub App 私钥 `.pem`（不入库；`*.pem` 已在 .gitignore 中）；
+2. 可选"记住到本次会话"——私钥用**你的口令 + PBKDF2(25 万次)** 派生的 AES-GCM 密钥加密后存在 sessionStorage；
+3. 发布时一次提交写入 `public/blogs/<slug>/{index.md,config.json,图片}`，新分类会顺带更新 `categories.json`。
 
-![](https://www.yysuni.com/blogs/readme/20b0791d012163ee.png)
+需要的环境变量见 `.env.example`：至少要有 `PUBLIC_GITHUB_APP_ID`（以及 owner/repo/branch）。
+发布后需等待 Vercel 重新构建，刷新才能看到更新。
 
-## 9. 互助群
+## 部署
 
-对于完全不是**程序员**的用户，确实会对于更新代码后，如何同步，如何**合并代码**手足无措。我创建了一个 **QQ群**（加群会简单点），或者 vx 群还是 tg 群会好一点可以 issue 里面说下就行。
+Vercel 项目根目录就是本仓库根目录，`vercel.json` 已声明：
 
-QQ 群：[https://qm.qq.com/q/spdpenr4k2](https://qm.qq.com/q/spdpenr4k2)
-> 不好意思，之前的那个qq群ID（1021438316），不知道为啥搜不到😂
+- `framework: null`、`buildCommand: pnpm build`、`outputDirectory: build`、`cleanUrls: true`
+- `_app/immutable/**` 长缓存；`/write` 加 `X-Robots-Tag: noindex` 与 `no-store`
 
-微信群：刚建好了一个微信群，没有 qq 的可以用这个微信群
-![](https://www.yysuni.com/blogs/readme/343f2c62035b8e23.webp)
+推送到 `main` 即触发部署。
 
-tg 群：1月1号，才创建的 tg 群 https://t.me/public_blog_2025
+## 回滚
 
-
-应该主要是我自己亲自帮助你们遇到问题怎么办。（后续看看有没有好心人）
-
-希望多多的非程序员加入 blogger 行列，web blog 还是很好玩的，属于自己的 blog 世界。
-
-游戏资产不一定属于你的，你只有**使用权**，但这个 blog **网站、内容、仓库一定是属于你的**
-
-#### 特殊的导航 Card
-
-因为这个 Card 是全局都在的，所以放在了 `src/components` 目录
-
-![](https://www.yysuni.com/blogs/readme/9780c38f886322fd.png)
-
-## Star History
-
-<a href="https://www.star-history.com/#YYsuni/2025-blog-public&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=YYsuni/2025-blog-public&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=YYsuni/2025-blog-public&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=YYsuni/2025-blog-public&type=date&legend=top-left" />
- </picture>
-</a>
+- **构建失败**：Vercel 会继续用上一个成功部署，线上不受影响；
+- **回退到旧 Next.js 站**：`git revert` 迁移提交（旧应用在 `legacy/next-blog/`，`public/` 内容未动），
+  或把旧应用移回根目录后再推一次。

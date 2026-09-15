@@ -1,0 +1,96 @@
+{
+	"meta": {
+		"title": "SelfWeb",
+		"description": "Sonquain 的个人博客，记录日常笔记。",
+		"username": "Sonquain"
+	},
+	"theme": {
+		"colorBrand": "#de4331",
+		"colorPrimary": "#4E3F42",
+		"colorSecondary": "#7b888e",
+		"colorBrandSecondary": "#FCC841",
+		"colorBg": "#eeeeee",
+		"colorBorder": "#ffffff",
+		"colorCard": "#ffffff66",
+		"colorArticle": "#ffffffcc"
+	},
+	"backgroundColors": [
+		"#FCC841",
+		"#DFEFFC",
+		"#DEDE92",
+		"#DE4331",
+		"#FE9750",
+		"#FCC841"
+	],
+	"artImages": [
+		{
+			"id": "cat",
+			"url": "/images/art/cat.png"
+		},
+		{
+			"id": "a46372ff45bc5524",
+			"url": "/images/art/a46372ff45bc5524.jpg"
+		},
+		{
+			"id": "82c7b14f1c711935",
+			"url": "/images/art/82c7b14f1c711935.jpg"
+		}
+	],
+	"currentArtImageId": "82c7b14f1c711935",
+	"backgroundImages": [
+		{
+			"id": "",
+			"url": ""
+		}
+	],
+	"currentBackgroundImageId": "",
+	"socialButtons": [
+		{
+			"id": "github",
+			"type": "github",
+			"value": "https://github.com/etk3mfalive",
+			"label": "Github",
+			"order": 3
+		},
+		{
+			"id": "juejin",
+			"type": "wechat",
+			"value": "etk3mfalive",
+			"label": "稀土掘金",
+			"order": 2
+		},
+		{
+			"id": "email",
+			"type": "email",
+			"value": "1138699365@qq.com",
+			"label": "",
+			"order": 1
+		},
+		{
+			"id": "button-1774430287991",
+			"type": "qq",
+			"value": "1138699365",
+			"label": "",
+			"order": 4
+		},
+		{
+			"id": "button-1774430300241",
+			"type": "bilibili",
+			"value": "https://space.bilibili.com/1966526891?spm_id_from=333.1007.0.0",
+			"label": "",
+			"order": 5
+		}
+	],
+	"clockShowSeconds": false,
+	"summaryInContent": false,
+	"isCachePem": true,
+	"hideEditButton": false,
+	"enableCategories": true,
+	"currentHatIndex": 3,
+	"hatFlipped": false,
+	"enableChristmas": false,
+	"beian": {
+		"text": "",
+		"link": "https://sonquain.com"
+	}
+}
