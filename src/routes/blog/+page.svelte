@@ -77,6 +77,12 @@
 <svelte:head>
 	<title>博客 | SelfWeb</title>
 	<meta name="description" content="Sonquain 的文章列表：日记、代码笔记与读书随笔。" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="博客 | SelfWeb" />
+	<meta property="og:description" content="Sonquain 的文章列表：日记、代码笔记与读书随笔。" />
+	<meta property="og:url" content="https://soq.app/blog" />
+	<meta property="og:image" content="https://soq.app/images/avatar.png" />
+	<meta name="twitter:card" content="summary" />
 </svelte:head>
 
 <div class="flex flex-col gap-4 py-6 sm:flex-row sm:items-end sm:justify-between">

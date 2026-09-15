@@ -24,6 +24,16 @@
 <svelte:head>
 	<title>{siteContent.meta.title}</title>
 	<meta name="description" content={siteContent.meta.description} />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content={siteContent.meta.title} />
+	<meta property="og:title" content={siteContent.meta.title} />
+	<meta property="og:description" content={siteContent.meta.description} />
+	<meta property="og:url" content="https://soq.app/" />
+	<meta property="og:image" content="https://soq.app/images/avatar.png" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content={siteContent.meta.title} />
+	<meta name="twitter:description" content={siteContent.meta.description} />
+	<meta name="twitter:image" content="https://soq.app/images/avatar.png" />
 </svelte:head>
 
 <div class="max-sm:flex max-sm:flex-col max-sm:items-center max-sm:gap-6 max-sm:pt-28 max-sm:pb-20">
