@@ -1,16 +1,19 @@
 /**
  * GitHub 写入层的仓库配置
  *
- * 说明（迁移期）：
- * - 内容仍保存在旧仓库 `public/blogs/**`，新站通过 scripts/sync-content.mjs 同步到 static/blogs 后构建。
- * - 等新仓库自己持有内容时，把 PUBLIC_CONTENT_DIR 改成 `static/blogs` 即可，其余代码不用动。
+ * 内容与站点数据都在本仓库里：
+ * - 文章内容：public/blogs/**（写作控制台提交到这里，构建时同步进 static/）
+ * - 站点配置与列表数据：src/lib/data/*.json
+ *
+ * 这些值会打进客户端包，本来就不是秘密（真正的秘密是私钥文件，只在浏览器里选择、不入库）。
+ * App ID 用 PUBLIC_GITHUB_APP_ID 覆盖。
  */
 
 export const GITHUB = {
 	owner: import.meta.env.PUBLIC_GITHUB_OWNER || 'etk3mfalive',
 	repo: import.meta.env.PUBLIC_GITHUB_REPO || '2025-blog-public',
 	branch: import.meta.env.PUBLIC_GITHUB_BRANCH || 'main',
-	appId: import.meta.env.PUBLIC_GITHUB_APP_ID || '',
+	appId: import.meta.env.PUBLIC_GITHUB_APP_ID || '3171094',
 	/** 文章内容在仓库里的目录 */
 	contentDir: (import.meta.env.PUBLIC_CONTENT_DIR || 'public/blogs').replace(/\/+$/, '')
 } as const

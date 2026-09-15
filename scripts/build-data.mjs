@@ -23,14 +23,10 @@ const root = process.cwd()
 const outDir = path.join(root, 'static', 'data')
 const postDir = path.join(outDir, 'posts')
 
-/** 与 src/lib/site-url.ts 同样的优先级（那边用了 process.env，属于服务端模块，这里单独算一份） */
+/** 与 src/lib/site-url.ts 保持一致：显式 env 优先，其次正式域名常量 */
 function resolveSiteUrl() {
 	const explicit = process.env.PUBLIC_SITE_URL || process.env.SITE_URL
 	if (explicit) return explicit.replace(/\/+$/, '')
-	const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL
-	if (productionHost) return `https://${productionHost}`.replace(/\/+$/, '')
-	const previewHost = process.env.VERCEL_URL
-	if (previewHost) return `https://${previewHost}`.replace(/\/+$/, '')
 	return 'https://soq.app'
 }
 
